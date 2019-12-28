@@ -3,8 +3,10 @@ class Player
   float x;
   float y;
   
+  static final byte UP_DIRECTION = -1;
+  static final byte DOWN_DIRECTION = 1;
   
-  float speed = 5;
+  final float speed = 10;
   
   Player(float _x, float _y)
   {
@@ -19,7 +21,7 @@ class Player
     rect(x, y, 50, 250);
   }
   
-  void move(byte direction)
+  public void move(byte direction)
   {
     y += direction * speed;
   }
