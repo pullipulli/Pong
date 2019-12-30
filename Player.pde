@@ -51,16 +51,10 @@ class Player
   
   void updateBorders()
   {
-    maxY = y + (longSide/2);
-    
+    maxY = y + (longSide/2); 
     minY = y - (longSide/2);
     minX = x - (shortSide / 2); 
     maxX = x + (shortSide / 2);
-    
-    line(minX, maxY, 0, maxY);
-    line(maxX, minY,0,minY);
-    line(minX, 0, minX, height);
-    line(maxX, 0, maxX, height);
   }
   
   void reset()

@@ -12,6 +12,7 @@ ScoreUI score;
 Menu mainMenu;
 
 boolean playGame = false;
+boolean ballLaunched = false;
 
 void setup()
 {
@@ -34,16 +35,26 @@ void draw()
     ball.show(); 
     player1.show();
     player2.show();
-    player1.move();
-    player2.move();
-    ball.move();
-    ball.updateScoreObject(score);
-    ball.checkCollisionWith(player1);
-    ball.checkCollisionWith(player2);
-    ball.checkCollisionsScreen();
-    if (ball.hasBeenMadeAPoint)
+    line(width/2, 0, width/2, height);
+    if(ballLaunched)
     {
-      reset();
+      player1.move();
+      player2.move();
+      ball.move();
+      ball.updateScoreObject(score);
+      ball.checkCollisionWith(player1);
+      ball.checkCollisionWith(player2);
+      ball.checkCollisionsScreen();
+      if (ball.hasBeenMadeAPoint)
+      {
+        ballLaunched = false;
+        reset();
+        if(score.someoneHasWon())
+        {
+          score.reset();
+          playGame = false;
+        }
+      }
     }
     score.show();
   }
@@ -51,8 +62,6 @@ void draw()
   {
     mainMenu.show();
   }
-  
-  
 }
 
 void keyPressed()
@@ -81,6 +90,11 @@ void keyReleased()
   } else if (key == 'u' || key == 'j')
   {
     player2.setDirection(Player.NO_DIRECTION);
+  }
+  
+  if(key == ' ')
+  {
+     ballLaunched = true;
   }
 }
 

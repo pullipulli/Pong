@@ -28,4 +28,19 @@ class ScoreUI
   {
     player2Score++;
   }
+  
+  boolean someoneHasWon()
+  {
+    if(player1Score == 10 || player2Score == 10)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  void reset()
+  {
+    player1Score = 0;
+    player2Score = 0;
+  }
 }
