@@ -8,10 +8,10 @@ class Player
   
   float longSide;
   float shortSide;
-  float upperY;
-  float bottomY;
-  float leftSideX;
-  float rightSideX;
+  float maxY;
+  float minY;
+  float maxX;
+  float minX;
   
   static final byte UP_DIRECTION = -1;
   static final byte DOWN_DIRECTION = 1;
@@ -51,10 +51,16 @@ class Player
   
   void updateBorders()
   {
-    bottomY = y + (longSide/2);
-    upperY = y - (longSide/2);
-    leftSideX = x - (shortSide / 2); 
-    rightSideX = x + (shortSide / 2);
+    maxY = y + (longSide/2);
+    
+    minY = y - (longSide/2);
+    minX = x - (shortSide / 2); 
+    maxX = x + (shortSide / 2);
+    
+    line(minX, maxY, 0, maxY);
+    line(maxX, minY,0,minY);
+    line(minX, 0, minX, height);
+    line(maxX, 0, maxX, height);
   }
   
   void reset()

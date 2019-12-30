@@ -1,9 +1,9 @@
 class ScoreUI
 {
-  PFont scoreFont;
-  int player1Score = 0;
-  int player2Score = 0;
-  String scoreString;
+  private PFont scoreFont;
+  private int player1Score = 0;
+  private int player2Score = 0;
+  private String scoreString;
   ScoreUI()
   {
     scoreFont = createFont("Arial", 64);

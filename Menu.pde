@@ -1,22 +1,23 @@
 class Menu
 {
+  
+  MenuButton PlayButton;
+  MenuButton QuitButton;
+
+  Menu()
+  {
+    PlayButton = new MenuButton("Play Pong!", width/2, 150);
+    QuitButton = new MenuButton("Quit :c", width/2, 300);
+  }
+
   void show()
   {
-    //TODO define it
-  }
-  
-  void playGame()
-  {
-    //TODO define it
+    PlayButton.show();
+    QuitButton.show();
   }
   
   void quitGame()
   {
-    //TODO define it
-  }
-  
-  void checkAtMouseClick()
-  {
-    //TODO define it
+    exit();
   }
 }

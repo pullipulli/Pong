@@ -1,26 +1,26 @@
 class Ball 
 {
-  float x;
-  float y;
-  float initialX;
-  float initialY;
-  float radius = 30;
+  private float x;
+  private float y;
+  private float initialX;
+  private float initialY;
+  private float radius = 30;
 
-  ScoreUI score = new ScoreUI();
+  private ScoreUI score = new ScoreUI();
   //collisions variables
-  float upperBorder = y - (radius / 2);
-  float bottomBorder = y + (radius / 2);
-  float rightBorder = x + (radius / 2);
-  float leftBorder = x - (radius / 2);
+  private float upperBorder = y - (radius / 2);
+  private float bottomBorder = y + (radius / 2);
+  private float rightBorder = x + (radius / 2);
+  private float leftBorder = x - (radius / 2);
 
-  float ySpeed = random (3, 5);
-  float xSpeed = random (3, 5);
+  private float ySpeed = random (3, 5);
+  private float xSpeed = random (3, 5);
 
-  byte xDirection = 1;
-  byte yDirection = 1;
+  private byte xDirection = 1;
+  private byte yDirection = 1;
 
   boolean hasBeenMadeAPoint = false;
-
+  
   Ball(float _x, float _y, ScoreUI _score)
   {
     x = _x;
@@ -105,9 +105,9 @@ class Ball
 
     if (isRightPlayer)
     {
-        if (rightBorder >= other.leftSideX && leftBorder <= other.rightSideX)
+        if (y > other.minY && y < other.maxY)  //if the ball is touching the paddle
         {
-          if (y > other.upperY && y < other.bottomY) //if the ball is touching the paddle
+          if (x >= other.minX && x < other.maxX) 
           {
             xDirection *= -1;
             ySpeed = random (3, 5);
@@ -116,9 +116,9 @@ class Ball
         }
     } else
     {
-      if (leftBorder <= other.rightSideX && rightBorder >= other.leftSideX)
+      if (y > other.minY && y < other.maxY)  //if the ball is touching the paddle
       {
-        if (y > other.upperY && y < other.bottomY)
+        if (x > other.minX && x <= other.maxX)
         {
           xDirection *= -1;
           ySpeed = random (3, 5);
