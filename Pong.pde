@@ -14,11 +14,14 @@ Menu mainMenu;
 boolean playGame = false;
 boolean ballLaunched = false;
 
+final int FRAMERATE = 60;
+final float deltaTime = 1f / FRAMERATE;
+
 void setup()
 {
   size(800, 600);
   background(0);
-  frameRate(60);
+  frameRate(FRAMERATE);
 
   ball = new Ball(width/2, height/2, score);
   player1 = new Player(100, height/2);
@@ -32,9 +35,9 @@ void draw()
   clear(); 
   if(playGame)
   {
-    ball.show(); 
     player1.show();
     player2.show();
+    ball.show();
     line(width/2, 0, width/2, height);
     if(ballLaunched)
     {

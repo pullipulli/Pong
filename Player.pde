@@ -19,7 +19,7 @@ class Player
   
   byte direction;
   
-  final float speed = 10;
+  final float speed = 300;
   
   Player(float _x, float _y)
   {
@@ -40,7 +40,7 @@ class Player
   
   void move()
   {
-    y += direction * speed;
+    y += direction * speed * deltaTime;
     updateBorders();
   }
   
@@ -48,7 +48,7 @@ class Player
   {
     direction = _direction;
   }
-  
+
   void updateBorders()
   {
     maxY = y + (longSide/2); 

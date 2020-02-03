@@ -12,9 +12,12 @@ class Ball
   private float bottomBorder = y + (radius / 2);
   private float rightBorder = x + (radius / 2);
   private float leftBorder = x - (radius / 2);
-
-  private float ySpeed = random (3, 5);
-  private float xSpeed = random (3, 5);
+  
+  final float collisionDelay = 500;      //the minimum time between 2 collisions, in milliseconds
+  float collisionTime = 0;
+  
+  private float ySpeed = random (200, 300);
+  private float xSpeed = random (200, 300);
 
   private byte xDirection = 1;
   private byte yDirection = 1;
@@ -49,8 +52,8 @@ class Ball
 
   void move()
   {
-    x += xSpeed * xDirection;
-    y += ySpeed * yDirection;
+    x += xSpeed * xDirection * deltaTime;
+    y += ySpeed * yDirection * deltaTime;
   }
 
   void updateScoreObject(ScoreUI _score)
@@ -64,8 +67,8 @@ class Ball
     if ( bottomBorder >= height  ||  upperBorder <= 0)
     {
       yDirection *= -1;
-      ySpeed = random (3, 5);
-      xSpeed = random (3, 5);
+      ySpeed = random (200, 300);
+      xSpeed = random (200, 300);
     }
 
     if (leftBorder <= 0)
@@ -90,43 +93,19 @@ class Ball
   }
 
   void checkCollisionWith(Player other)
-  { 
+  {    
     updateColliders();
 
-    boolean isRightPlayer;
-
-    if (other.x >= width/2) // I assume that  the right player is in the right part of the screen
+    boolean isColliding = !(y < other.minY || y > other.maxY || x > other.maxX || x < other.minX);
+    if(millis() - collisionTime >= collisionDelay)
+    if (isColliding)  //if the ball is touching the paddle
     {
-      isRightPlayer = true;
-    } else
-    {
-      isRightPlayer = false;
+        collisionTime = millis();
+        xDirection *= -1;
+        ySpeed = random (200, 300);
+        xSpeed = random (200, 300);
     }
-
-    if (isRightPlayer)
-    {
-        if (y > other.minY && y < other.maxY)  //if the ball is touching the paddle
-        {
-          if (x >= other.minX && x < other.maxX) 
-          {
-            xDirection *= -1;
-            ySpeed = random (3, 5);
-            xSpeed = random (3, 5);
-          }
-        }
-    } else
-    {
-      if (y > other.minY && y < other.maxY)  //if the ball is touching the paddle
-      {
-        if (x > other.minX && x <= other.maxX)
-        {
-          xDirection *= -1;
-          ySpeed = random (3, 5);
-          xSpeed = random (3, 5);
-        }
-      }
-    }
+    
   }
   
-
 }
